@@ -28,13 +28,25 @@ class BankAccount:
         if self.balance > 0:
             self.balance += self.balance * self.rate
         return self
-    # @classmethod
-    # def display_accounts(cls):
-    #     return cls.all_accounts
+
+class User:
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+        self.account = BankAccount(int_rate=0.02, balance=0)
+    
+    def start(self, amount):
+        self.account.deposit(amount)
+
+    def retreve(self, amount):
+        self.account.withdraw(amount)
+
+    def my_balance(self):
+        self.account.display_account_info()
 
 
-acc1 = BankAccount(0.26,0)
-acc2 = BankAccount(0.29,0)
-acc1.deposit(100).deposit(80).deposit(50).withdraw(100).yield_interest().display_account_info()
-acc2.deposit(110.6).deposit(48.5).withdraw(200).yield_interest().display_account_info()
-# print(BankAccount.display_accounts(BankAccount))
+acc1 = User("med", "@gmail")
+acc1.start(100)
+acc1.retreve(200)
+info = acc1.my_balance()
+print (info)
