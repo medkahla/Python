@@ -43,6 +43,11 @@ class Player:
         self.age = age
         self.position = position
         self.team = team
+
+    # display objects
+    def __repr__(self):
+        display = f"\n Player: {self.name}, {self.age} y/o, pos: {self.position}, team: {self.team} \n"
+        return display
     
 # player1 = Player()
 # print(player1)
