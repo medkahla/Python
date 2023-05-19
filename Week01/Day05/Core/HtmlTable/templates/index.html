@@ -10,21 +10,26 @@
 <body>
     <h1 class="fw-bolder">Html Table</h1>
     <h3 class="fout-monospace">Here we will put a dictionary in a table</h3>
+    <div class="container">
     <table class="table table-striped">
         <thead>
             <tr>
-                <th class="table-dark">Names</th>
-                <th class="table-dark">Ages</th>
+                <th class="table-dark">First Name</th>
+                <th class="table-dark">Last Name</th>
+                <th class="table-dark">Full Name</th>
             </tr>
         </thead>
         <tbody>
-            {% for student in students %}
+            {% for user in users %}
                 <tr>
-                    <td>{{ student['name'] }}</td>
-                    <td>{{ student['age'] }}</td>
+                    <td>{{ user['first_name'] }}</td>
+                    <td>{{ user['last_name'] }}</td>
+                    <td>{{ user['first_name'] }} {{ user['last_name'] }}</td>
+
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+    </div>
 </body>
 </html>
