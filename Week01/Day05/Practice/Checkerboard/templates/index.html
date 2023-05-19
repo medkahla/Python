@@ -11,34 +11,13 @@
     <h1>Here's your CheckerBoard</h1>
     <div class="container">
         <table>
-            
+            {% for i in range(nc) %}
             <tr>
-                
-                <td class="color1"></td>
-                <td class="color2"></td>
-                <td class="color1"></td>
-                <td class="color2"></td>
-                
+                {% for j in range(nr) %}
+                <td class="color{{(i+j)%2 +1}}"></td>
+                {% endfor %}
             </tr>
-            
-            <tr>
-                <td class="color2"></td>
-                <td class="color1"></td>
-                <td class="color2"></td>
-                <td class="color1"></td>
-            </tr>
-            <tr>
-                <td class="color1"></td>
-                <td class="color2"></td>
-                <td class="color1"></td>
-                <td class="color2"></td>
-            </tr>
-            <tr>
-                <td class="color2"></td>
-                <td class="color1"></td>
-                <td class="color2"></td>
-                <td class="color1"></td>
-            </tr>
+            {% endfor %}
         </table>
     </div>
 </body>

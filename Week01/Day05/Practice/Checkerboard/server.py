@@ -7,19 +7,19 @@ def index():
 
 # @app.route("/<int:numR>")
 # def row(numR):
-#     return render_template("index.html", nr=numR)
+# return render_template("index.html", nr=numR)
 
-# @app.route("/<int:numR>/<int:numC>")
-# def column(numR, numC):
-#     return render_template("index.html", nr=numR, nc=numC)
+@app.route("/<int:numR>/<int:numC>")
+def column(numR, numC):
+    return render_template("index.html", nr=numR, nc=numC)
 
 # @app.route("/<int:numR>/<int:numC>/<firstC>")
 # def color1(numR, numC, firstC):
 #     return render_template("index.html", nr=numR, nc=numC, fc=firstC)
 
-# @app.route("/<int:numR>/<int:numC>/<firstC>/<secondC>")
-# def color2(numR, numC, firstC, secondC):
-#     return render_template("index.html", nr=numR, nc=numC, fc=firstC, sc=secondC)
+@app.route("/<int:numR>/<int:numC>/<firstC>/<secondC>")
+def color2(numR, numC, firstC, secondC):
+    return render_template("index.html", nr=numR, nc=numC, fc=firstC, sc=secondC)
 
 
 if __name__ == "__main__":
