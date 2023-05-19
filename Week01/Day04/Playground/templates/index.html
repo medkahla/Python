@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <style>
+       h1{
+        text-align: center;
+        color: darkslategray;
+       } 
+       body{
+        background-color: antiquewhite;
+       }
+       .container{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        margin-top: 100px;
+       }     
+       .block{
+        display: flex;
+        height: 120px;
+        width: 120px;
+        margin:20px;
+        border: 3px solid black ;
+        border-radius: 15%;
+        box-shadow: 4px 4px 4px gray ;
+        background-color: '{{c}}';
+       }
+    </style>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playground - Play</title>
+</head>
+<body>
+    <h1>Welcome !</h1>
+    <div class="container">
+        {% for k in range(0,x) %}
+            <div class="block"></div>
+        {% endfor %}
+    </div>
+</body>
+</html>
