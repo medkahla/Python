@@ -32,8 +32,9 @@ class Ninja:
         return connectToMySQL(DATABASE).query_db(query,data)
     
     @classmethod
-    def get_list(cls, data):
+    def get_list(cls, dojo_id):
         query = "SELECT * FROM ninjas WHERE dojo_id = %(dojo_id)s;"
+        data = {"dojo_id": dojo_id}
         results = connectToMySQL(DATABASE).query_db(query, data)
         ninjas = []
         if(results):
@@ -41,4 +42,14 @@ class Ninja:
                 ninjas.append(cls(row))
             return ninjas
         else:
-            return []   
+            return [] 
+        
+
+    #     @classmethod
+    # def get_one(cls,dojo_id):
+    #     query = """
+    #     SELECT * FROM dojos WHERE id = %(id)s;
+    #     """
+    #     data = {'id':dojo_id}
+    #     result = connectToMySQL(DATABASE).query_db(query,data)
+    #     return cls(result[0]) # type: ignore

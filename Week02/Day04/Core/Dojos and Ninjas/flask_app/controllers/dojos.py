@@ -17,8 +17,8 @@ def create():
     Dojo.add_dojo(request.form)
     return redirect('/dojos')
 
-@app.route('/dojos/<id>')
-def liste(id):
-    dojo = Dojo.get_one(id)
-    ninjas = Ninja.get_list(dojo)
-    return render_template("list_ninjas.html", ninjas = ninjas, dojo=dojo)
+@app.route('/dojos/show/<int:dojo_id>')
+def dojo_show(dojo_id):
+    dojo = Dojo.get_one(dojo_id)
+    ninjas = Ninja.get_list(dojo_id)
+    return render_template("dojo_show.html",dojo=dojo, ninjas=ninjas)
