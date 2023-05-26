@@ -14,7 +14,7 @@ class MySQLConnection:
         # establish the connection to the database
         self.connection = connection
     # the method to query the database
-    def query_db(self, query:str, data:dict):
+    def query_db(self, query:str, data:dict=None): # type: ignore
         with self.connection.cursor() as cursor:
             try:
                 query = cursor.mogrify(query, data)

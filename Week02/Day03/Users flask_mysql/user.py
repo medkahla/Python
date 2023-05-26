@@ -18,6 +18,14 @@ class User:
         # Create an empty list to append our instances of friends
         users = []
         # Iterate over the db results and create instances of friends with cls.
-        for user in results:
+        for user in results: # type: ignore
             users.append( cls(user) )
         return users
+    
+    @classmethod
+    def create(cls, data):
+        query = """
+        INSERT INTO users (first_name, last_name, email )
+        VALUES (%(first_name)s,%(last_name)s,%(email)s);
+        """
+        return connectToMySQL('users_schema').query_db(query, data)
