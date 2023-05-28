@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .titre{
+            display: flex;
+            justify-content: space-between;
+        }
+
+    </style>
+    <title>Show recipe</title>
+</head>
+<body>
+    <nav d="navbar-example2" class="navbar navbar-light bg-light m-3">
+        <h4>Welcome to Recipes, <strong>{{user.first_name}}</strong> </h4>
+        <ul class="nav nav-pills">
+            <li class="nav-item mr-sm-2">
+            <a href="/recipes" class="btn btn-outline-success my-2 my-sm-0">Go Back to recipes</a>
+            </li>
+            <li class="nav-item mr-sm-2">
+            <a href="/logout" class="btn btn-outline-danger mr-sm-2">LOGOUT</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="titre">
+            <h3>Name: <strong>{{recipe.title}}</strong></h3>
+            <h4>Posted by: <strong>{{recipe.first_name}}</strong></h4>
+        </div>
+        <div class="container border border-secondary p-2">
+            <p>Description: <strong>{{recipe.description}}</strong></p>
+            <p>Instructions: <strong>{{recipe.instructions}}</strong></p>
+            <p>Under 30 minutes?: <strong>{% if recipe.timing == 1 %} Yes {%else%} No {%endif%}</strong></p>
+            <p>Date Made: <strong>{{recipe.cooked}}</strong></p>
+        </div>
+    </div>
+</body>
+</html>
