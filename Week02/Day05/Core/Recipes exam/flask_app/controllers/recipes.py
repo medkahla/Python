@@ -19,6 +19,7 @@ def create_recipe():
 @app.route('/recipes/<int:id>')
 def recipeshow(id):
     recipe = Recipe.get_one(id)
+    print(recipe)
     user = User.get_by_id({'id':session['user_id']})
     return render_template('recipe_show.html', recipe = recipe, user=user)
 

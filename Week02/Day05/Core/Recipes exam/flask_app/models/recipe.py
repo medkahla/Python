@@ -1,6 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app import DATABASE
 from flask import flash, session
+from flask_app.models import user
 
 class Recipe :
     def __init__(self,data):
@@ -11,6 +12,7 @@ class Recipe :
         self.instructions = data['instructions']
         self.cooked = data['cooked']
         self.timing = data['timing']
+        # self.owner = 
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
@@ -38,11 +40,13 @@ class Recipe :
     @classmethod
     def get_one(cls, recipe_id):
         query = """
-        SELECT * FROM recipes JOIN users on user_id = users.id WHERE recipes.id = %(id)s;
+        SELECT recipes.id, title, user_id, description, instructions, cooked, timing, first_name 
+        FROM recipes 
+        JOIN users on user_id = users.id WHERE recipes.id = %(id)s;
         """
         data = {'id':recipe_id}
         result = connectToMySQL(DATABASE).query_db(query,data)
-        return cls(result[0]) # type: ignore
+        return result[0] # type: ignore
     
     @classmethod
     def update(cls, data):
