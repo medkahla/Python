@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create event</title>
+</head>
+<body>
+    <form action="/parties/create" method="post">
+        What
+        <input type="text" name="title" id="">
+        Where
+        <input type="text" name="location" id="">
+        When
+        <input type="date" name="date" id="">
+        All ages
+        <input type="radio" name="all_ages" id="" value="1">Yes
+        <input type="radio" name="all_ages" id="" value="0">No
+        Desciption
+        <textarea name="description" id="" cols="30" rows="10"></textarea>
+        <input type="hidden" name="poster" value="{{user.name}}">
+        <input type="submit" value="Add Party">
+    </form>
+</body>
+</html>
