@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Event handler for the status switch button
+      $('.status-switch').on('click', function() {
+        var switchButton = $(this);
+        var userRow = switchButton.closest('.user-row');
+        var userId = userRow.data('user-id');
+        var newStatus = userRow.data('current-status') === 1 ? 0 : 1;
+
+        // Perform Ajax request to update the status
+        $.ajax({
+          url: '/update_status',
+          method: 'POST',
+          data: { user_id: userId, new_status: newStatus },
+          success: function(response) {
+            // Update the status in the HTML
+            userRow.data('current-status', newStatus);
+            switchButton.text(newStatus === 1 ? 'Active' : 'Inactive');
+          },
+          error: function() {
+            console.log('An error occurred during the Ajax request.');
+          }
+        });
+      });
+    });
+  </script>
+  <style>
+    .status-switch {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .status-switch.active {
+      background-color: #28a745;
+    }
+
+    .status-switch.inactive {
+      background-color: #dc3545;
+    }
+  </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Dashboard</title>
+</head>
+<body style="background-image: url('../static/background.png'); background-size: cover;"> 
+  <div class="nav d-flex justify-content-between">      
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/reviews">Reviews</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/admin/users">Profils</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/companies">Companies</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/sectors">Categories</a>
+        </li>
+      </ul>
+        <div class="d-flex align-items-center">
+            <a href="/"><button class="btn btn-success" style="margin-right: 10px;">Home</button></a>
+            <a href="/logout"><button class="btn btn-danger" style="margin-right: 16px;">Logout</button></a>
+        </div>
+      </div>
+    <div class="container users" style="margin-top: 50px;">
+        <h5>Here the list of users</h5>
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <th>Name</th>
+                <th>Pseudo</th>
+                <th>Email</th>
+                <th>Actif</th>
+                <th>Actions</th>    
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{user.first_name}} {{user.last_name}}</td>
+                    <td>{{user.pseudo}}</td>
+                    <td>{{user.email}}</td>
+                    <td>
+                      <div class="user-row" data-user-id="{{ user.id }}" data-current-status="{{ user.actif }}">
+                        {% if user.actif == 1 %}
+                          <button class="status-switch active">Active</button>
+                        {% else %}
+                          <button class="status-switch inactive">Inactive</button>
+                        {% endif %}
+                      </div>
+                    </td>
+                    <td><button class="btn"><i class="fa fa-edit"></i> </button> | <!-- Button trigger modal -->
+                      <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal{{user.id}}">
+                        <i class="fa fa-trash"></i>
+                        </button>
+                        
+                        
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal{{user.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">DELETE</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                Are you sure you want to delete "{{user.first_name}}"?
+                              </div>
+                              <div class="modal-footer">
+                                <a href=""><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button></a>
+                                <a href="/admin/user/{{user.id}}/delete"><button type="button" class="btn btn-danger">Delete</button></a>
+                              </div>
+                            </div>
+                          </div>
+                        </div></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+    <script>
+      function changeStatus(){
+        alert('you will disable this user!')
+
+      }
+    </script>
+</body>
+</html>
